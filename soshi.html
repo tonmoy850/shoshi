@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Shoshi ❤️</title>
+    <style>
+        body {
+            background-color: #fff0f3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+            max-width: 450px;
+            width: 90%;
+        }
+        h1, h2 { color: #ff4d6d; }
+        p { color: #555; line-height: 1.6; }
+        .quiz-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 12px;
+            font-size: 1rem;
+            border: 2px solid #ff4d6d;
+            border-radius: 12px;
+            cursor: pointer;
+            background: white;
+            color: #ff4d6d;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover { background: #ff4d6d; color: white; }
+        
+        #valBtn { background-color: #ff4d6d; color: white; border: none; }
+        #noBtn { background-color: #adb5bd; color: white; border: none; }
+
+        .gallery {
+            display: none;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        .gallery img { width: 100%; border-radius: 10px; border: 1px solid #ddd; }
+        .hidden { display: none; }
+        .btn-row { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="gameBox">
+    <div id="quiz-container">
+        <h2 id="question-text">Question 1: Who is the funniest person you know?</h2>
+        <div class="quiz-btns" id="quiz-options">
+            <button onclick="nextQuestion(2)">Tonmoy</button>
+            <button onclick="nextQuestion(2)">তন্ময়</button>
+            <button onclick="nextQuestion(2)">तन्मय</button>
+        </div>
+    </div>
+
+    <div id="askPhase" class="hidden">
+        <img src="https://pbs.twimg.com/media/DuH9Rd-W4AE9IWj.jpg" width="150">
+        <h1>Shoshi! ❤️</h1>
+        <p>Everything is cleared now. So...</p>
+        <p><strong>Will you be my সাড়ে ৩ কেজি মাছ কাটার লোক ?</strong></p>
+        <div class="btn-row">
+            <button id="valBtn" onclick="celebrate()">YES!</button>
+            <button id="noBtn" onmouseover="moveButton()">No</button>
+        </div>
+    </div>
+
+    <div id="successPhase" class="hidden">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Mr._Bean_2007.jpg" width="150">
+        <h1 style="color: #ff4d6d;">yes ছাড়া উপায় নাই!🐸</h1>
+        <p>Looking forward to it! ❤️</p>
+        <button onclick="showGallery()" style="background: #6a0572; color: white; border:none;">Open Our Gallery 📸</button>
+        <div class="gallery" id="photoGallery">
+            <img src="https://nitupasdailybazaarbd.com/wp-content/uploads/2023/02/20230130_071650.jpg" alt="Memory 1">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMDSIkPu06pHkeFe6tYX-VgwVH8E6-Zecjr1BbjqG5PXflRaOZ6_fqQtN7qvpXvGlZHl-dlDK9AoTs2J7qfcjh7kGM1yHWdRvGOBoQ1Q&s=10" alt="Memory 2">
+        </div>
+    </div>
+</div>
+
+<script>
+    function nextQuestion(num) {
+        const qText = document.getElementById('question-text');
+        const qBtns = document.getElementById('quiz-options');
+
+        if (num === 2) {
+            qText.innerText = "Question 2: What colour is Shoshi's favourite?";
+            qBtns.innerHTML = `
+                <button onclick="nextQuestion(3)"> যখন যেডা ভালো লাগে</button>
+                <button onclick="nextQuestion(3)">৭ রঙ</button>
+                <button onclick="nextQuestion(3)">বলবো নাহ</button>
+            `;
+        } else if (num === 3) {
+            qText.innerText = "Final Question: ঘুরা মাছ কাটে পারো?";
+            qBtns.innerHTML = `
+                <button onclick="showValentine()">Yes</button>
+                <button onclick="showValentine()">No</button>
+                <button onclick="showValentine()">পরে বলি</button>
+            `;
+        }
+    }
+
+    function showValentine() {
+        document.getElementById('quiz-container').classList.add('hidden');
+        document.getElementById('askPhase').classList.remove('hidden');
+    }
+
+    function moveButton() {
+        const btn = document.getElementById('noBtn');
+        const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+        btn.style.position = "fixed";
+        btn.style.left = x + "px";
+        btn.style.top = y + "px";
+    }
+
+    function celebrate() {
+        document.getElementById('askPhase').classList.add('hidden');
+        document.getElementById('successPhase').classList.remove('hidden');
+    }
+
+    function showGallery() {
+        const g = document.getElementById('photoGallery');
+        g.style.display = (g.style.display === "grid") ? "none" : "grid";
+    }
+</script>
+
+</body>
+</html>
